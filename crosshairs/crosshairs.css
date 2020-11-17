@@ -1,3 +1,7 @@
+:root {
+  --crosshair-movement-time: 0.2s;
+}
+
 .ch-target { position: relative; }
 
 .ch-corners {
