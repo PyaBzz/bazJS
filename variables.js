@@ -10,7 +10,7 @@ isFunction = function (variable) {
     return typeof variable === 'function';
 }
 
-ifFunctionRun = function (variable) {
+ifFunctionRun = function (variable, ...params) {
     if (isFunction(variable))
-        variable();
+        variable(...params);
 }
