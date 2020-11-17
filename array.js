@@ -1,24 +1,9 @@
-Array.prototype.takeFirstOut = function () {
-    let firstElement = this.shift();
-    return firstElement;
+Array.prototype.takeFirstOut = function (elementCount = 1) {
+    return this.splice(0, elementCount);
 }
 
-Array.prototype.pickRandom = function (batchSize = 1) {
-    if (batchSize === 1) {
-        let randomIndex = Math.floor(Math.random() * this.length);
-        return this[randomIndex];
-    }
-    else {
-        let clone = this.clone();
-        let rand = new Random();
-        for (let i = 1; i < clone.length; i++) {
-            let ind = rand.getInt(0, i - 1);
-            let temp = clone[ind];
-            clone[ind] = clone[i];
-            clone[i] = temp;
-        }
-        return clone.slice(0, batchSize);
-    }
+Array.prototype.takeLastOut = function (elementCount = 1) {
+    return this.splice(-elementCount, elementCount);
 }
 
 Array.prototype.clone = function (i = 0, elementCount) {
@@ -35,6 +20,12 @@ Array.prototype.discardElements = function () {
 Array.prototype.getMax = function () {
     let index = this.getIndexOfMax();
     return this[index];
+}
+
+Array.prototype.getWithHighest = function (valueGetter, elementCount = 1) {
+    let temp = this.clone();
+    temp.sortDescending(valueGetter);
+    return temp.clone(0, elementCount);
 }
 
 Array.prototype.getIndexOfMax = function () {
@@ -57,10 +48,22 @@ Array.prototype.sortDescending = function (valueGetter) {
     this.sort((a, b) => valueGetter(b) - valueGetter(a));
 }
 
-Array.prototype.getWithHighest = function (valueGetter, elementCount) {
-    let temp = this.clone();
-    temp.sortDescending(valueGetter);
-    return temp.clone(0, elementCount);
+Array.prototype.pickRandom = function (batchSize = 1) {
+    if (batchSize === 1) {
+        let randomIndex = Math.floor(Math.random() * this.length);
+        return this[randomIndex];
+    }
+    else {
+        let clone = this.clone();
+        let rand = new Random();
+        for (let i = 1; i < clone.length; i++) {
+            let ind = rand.getInt(0, i - 1);
+            let temp = clone[ind];
+            clone[ind] = clone[i];
+            clone[i] = temp;
+        }
+        return clone.slice(0, batchSize);
+    }
 }
 
 Object.defineProperties(Array.prototype, {
