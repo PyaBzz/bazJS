@@ -21,6 +21,18 @@ Array.prototype.doToAll = function (action) {
     this.forEach(element => action(element));
 }
 
+Array.prototype.doToAllWithTimeGap = function (action, timeStep) {
+    let i = 0;
+    let me = this;
+    const loopHandle = setInterval(function () {
+        let element = me[i];
+        action(element);
+        i++;
+        if (i === me.length)
+            clearInterval(loopHandle);
+    }, timeStep);
+}
+
 Array.prototype.discardElements = function () {
     while (this.hasAny)
         this.takeFirstOut();
