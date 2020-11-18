@@ -17,6 +17,10 @@ Array.prototype.clone = function (i = 0, elementCount) {
     return this.slice(i, elementCount);
 }
 
+Array.prototype.doToAll = function (action) {
+    this.forEach(element => action(element));
+}
+
 Array.prototype.discardElements = function () {
     while (this.hasAny)
         this.takeFirstOut();
