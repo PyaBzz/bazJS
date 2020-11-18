@@ -6,9 +6,9 @@ Array.prototype.takeLastOut = function (elementCount = 1) {
     return this.splice(-elementCount, elementCount);
 }
 
-Array.prototype.addToFront = function (...args) {
-    for (let i = arguments.length - 1; i >= 0; i--)
-        this.unshift(arguments[i]);
+Array.prototype.addToFront = function (...params) {
+    for (let i = params.length - 1; i >= 0; i--)
+        this.unshift(params[i]);
 }
 
 Array.prototype.clone = function (i = 0, elementCount) {
