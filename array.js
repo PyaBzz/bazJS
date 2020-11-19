@@ -76,14 +76,18 @@ Array.prototype.pickRandom = function (batchSize = 1) {
     }
     else {
         let clone = this.clone();
-        let rand = new Random();
-        for (let i = 1; i < clone.length; i++) {
-            let ind = rand.getInt(0, i - 1);
-            let temp = clone[ind];
-            clone[ind] = clone[i];
-            clone[i] = temp;
-        }
+        clone.shuffle();
         return clone.slice(0, batchSize);
+    }
+}
+
+Array.prototype.shuffle = function (batchSize = 1) {
+    let rand = new Random();
+    for (let i = 1; i < this.length; i++) {
+        let ind = rand.getInt(0, i - 1);
+        let temp = this[ind];
+        this[ind] = this[i];
+        this[i] = temp;
     }
 }
 
