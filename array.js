@@ -46,7 +46,7 @@ Array.prototype.getMax = function () {
 Array.prototype.getWithHighest = function (valueGetter, elementCount = 1) {
     let temp = this.clone();
     temp.sortDescending(valueGetter);
-    return temp.clone(0, elementCount);
+    return temp.takeFirstOut(elementCount);
 }
 
 Array.prototype.getIndexOfMax = function () {
