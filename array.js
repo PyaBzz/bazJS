@@ -21,15 +21,17 @@ Array.prototype.doToAll = function (action) {
     this.forEach(element => action(element));
 }
 
-Array.prototype.doToAllWithTimeGap = function (action, timeStep) {
+Array.prototype.doToAllWithTimeGap = function (action, timeStep, callback) {
     let i = 0;
     let me = this;
-    const loopHandle = setInterval(function () {
+    const loopHandle = setInterval(function () { //Todo: Could remove the first delay
         let element = me[i];
         action(element);
         i++;
-        if (i === me.length)
+        if (i === me.length) {
             clearInterval(loopHandle);
+            ifFunctionRun(callback);
+        }
     }, timeStep);
 }
 
