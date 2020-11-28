@@ -35,11 +35,6 @@ Array.prototype.doToAllWithTimeGap = function (action, timeStep, callback) {
     }, timeStep);
 }
 
-Array.prototype.discardElements = function () {
-    while (this.hasAny)
-        this.takeFirstOut();
-}
-
 Array.prototype.getWithHighest = function (valueGetter, elementCount = 1) { //Todo: Use getMax to improve performance
     let temp = this.clone();
     temp.sortDescending(valueGetter);
