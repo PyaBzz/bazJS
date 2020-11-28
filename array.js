@@ -18,7 +18,7 @@ Array.prototype.clone = function (fromIndex = 0, elementCount) {
 }
 
 Array.prototype.doToAll = function (action) {
-    this.forEach(element => action(element));
+    this.forEach((elem, ind, arr) => action(elem, ind, arr));
 }
 
 Array.prototype.doToAllWithTimeGap = function (action, timeStep, callback) {
@@ -36,11 +36,15 @@ Array.prototype.doToAllWithTimeGap = function (action, timeStep, callback) {
 }
 
 Array.prototype.getTop = function (getter = el => el, elementCount = 1) {
-    if (elementCount === 1) //Todo: compare if elementCount < log(this.length) and implement O(n*k)
-        return this.getMax(getter)[1];
-    let temp = this.clone();
-    temp.sortDescending(getter);
-    return temp.clone(0, elementCount);
+    if (elementCount === 1) { //Todo: compare if elementCount < log(this.length) and implement O(n*k)
+        let max = this.getMax(getter);
+        return { items: [max.item], indexes: [max.index], values: [max.value] };
+    }
+    let temp = [];
+    this.forEach((e, i, a) => temp[i] = { elem: e, ind: i });
+    temp.sortDescending(n => getter(n.elem));
+    let top = temp.takeFirstOut(elementCount);
+    return { items: top.map(n => n.elem), indexes: top.map(n => n.ind), values: top.map(n => getter(n.elem)) };
 }
 
 Array.prototype.getMax = function (getter = el => el) {
@@ -56,7 +60,7 @@ Array.prototype.getMax = function (getter = el => el) {
             maxVal = val;
         }
     }
-    return [index, element, maxVal];
+    return { item: element, index: index, value: maxVal };
 }
 
 Array.prototype.sortAscending = function (valueGetter) {
