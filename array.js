@@ -11,10 +11,10 @@ Array.prototype.addToFront = function (...params) {
         this.unshift(params[i]);
 }
 
-Array.prototype.clone = function (i = 0, elementCount) {
+Array.prototype.clone = function (fromIndex = 0, elementCount) {
     if (isUndefined(elementCount))
         elementCount = this.length;
-    return this.slice(i, elementCount);
+    return this.slice(fromIndex, elementCount);
 }
 
 Array.prototype.doToAll = function (action) {
@@ -40,18 +40,18 @@ Array.prototype.discardElements = function () {
         this.takeFirstOut();
 }
 
-Array.prototype.getMax = function () {
-    let index = this.getIndexOfMax();
-    return this[index];
-}
-
-Array.prototype.getWithHighest = function (valueGetter, elementCount = 1) {
+Array.prototype.getWithHighest = function (valueGetter, elementCount = 1) { //Todo: Use getMax to improve performance
     let temp = this.clone();
     temp.sortDescending(valueGetter);
     return temp.takeFirstOut(elementCount);
 }
 
-Array.prototype.getIndexOfMax = function () {
+Array.prototype.getMax = function () { //O(n) faster than getWithHighest
+    let index = this.getIndexOfMax();
+    return this[index];
+}
+
+Array.prototype.getIndexOfMax = function () { //Todo: Use valueGetter
     let index = 0;
     let max = this[0];
     for (let i = 1; i < this.length; i++) {
