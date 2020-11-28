@@ -35,7 +35,7 @@ Array.prototype.doToAllWithTimeGap = function (action, timeStep, callback) {
     }, timeStep);
 }
 
-Array.prototype.getWithHighest = function (getter = el => el, elementCount = 1) {
+Array.prototype.getTop = function (getter = el => el, elementCount = 1) {
     if (elementCount === 1) //Todo: compare if elementCount < log(this.length) and implement O(n*k)
         return this.getMax(getter)[1];
     let temp = this.clone();
@@ -47,7 +47,7 @@ Array.prototype.getMax = function (getter = el => el) {
     let index = 0;
     let element = this[index];
     let maxVal = getter(element);
-    for (let i = 1; i < this.length; i++) { //O(n) faster than getWithHighest
+    for (let i = 1; i < this.length; i++) { //O(n) faster than getTop
         const elem = this[i]
         const val = getter(elem);
         if (val > maxVal) {
