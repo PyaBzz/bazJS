@@ -35,27 +35,28 @@ Array.prototype.doToAllWithTimeGap = function (action, timeStep, callback) {
     }, timeStep);
 }
 
-Array.prototype.getWithHighest = function (valueGetter, elementCount = 1) { //Todo: Use getMax to improve performance
+Array.prototype.getWithHighest = function (getter = el => el, elementCount = 1) {
+    if (elementCount === 1) //Todo: compare if elementCount < log(this.length) and implement O(n*k)
+        return this.getMax(getter)[1];
     let temp = this.clone();
-    temp.sortDescending(valueGetter);
-    return temp.takeFirstOut(elementCount);
+    temp.sortDescending(getter);
+    return temp.clone(0, elementCount);
 }
 
-Array.prototype.getMax = function () { //O(n) faster than getWithHighest
-    let index = this.getIndexOfMax();
-    return this[index];
-}
-
-Array.prototype.getIndexOfMax = function () { //Todo: Use valueGetter
+Array.prototype.getMax = function (getter = el => el) {
     let index = 0;
-    let max = this[0];
-    for (let i = 1; i < this.length; i++) {
-        if (this[i] > max) {
+    let element = this[index];
+    let maxVal = getter(element);
+    for (let i = 1; i < this.length; i++) { //O(n) faster than getWithHighest
+        const elem = this[i]
+        const val = getter(elem);
+        if (val > maxVal) {
             index = i;
-            max = this[i];
+            element = elem;
+            maxVal = val;
         }
     }
-    return index;
+    return [index, element, maxVal];
 }
 
 Array.prototype.sortAscending = function (valueGetter) {
