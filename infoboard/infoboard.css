@@ -1,0 +1,18 @@
+.infoboard {
+  color: darkgrey;
+  font-size: 12px;
+}
+
+.infoboard-item {
+}
+
+.infoboard-label {
+  /* font-weight: bold; */
+  color: green;
+  font-size: 24px;
+}
+
+.infoboard-value {
+  color: yellowgreen;
+  font-size: 18px;
+}
