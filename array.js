@@ -17,11 +17,7 @@ Array.prototype.clone = function (fromIndex = 0, elementCount) {
     return this.slice(fromIndex, elementCount);
 }
 
-Array.prototype.doToAll = function (action) {
-    this.forEach((elem, ind, arr) => action(elem, ind, arr));
-}
-
-Array.prototype.doToAllWithTimeGap = function (action, timeStep, callback) {
+Array.prototype.forEachInterval = function (action, timeStep, callback) {
     let i = 0;
     let me = this;
     const loopHandle = setInterval(function () { //Todo: Could remove the first delay
