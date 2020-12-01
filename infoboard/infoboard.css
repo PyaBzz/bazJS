@@ -1,15 +1,14 @@
 .infoboard {
-  color: darkgrey;
-  font-size: 12px;
+  text-align: left;
 }
 
 .infoboard-item {
+  line-height: 1;
 }
 
 .infoboard-label {
-  /* font-weight: bold; */
   color: green;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .infoboard-value {
