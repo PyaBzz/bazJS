@@ -92,4 +92,5 @@ Array.prototype.shuffle = function (batchSize = 1) {
 Object.defineProperties(Array.prototype, {
     last: { get: function () { return this[this.length - 1] } },
     hasAny: { get: function () { return Boolean(this.length) } },
+    hasNone: { get: function () { return Boolean(this.length === 0) } },
 });
