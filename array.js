@@ -83,9 +83,7 @@ Array.prototype.shuffle = function (batchSize = 1) {
     let rand = new Random();
     for (let i = 1; i < this.length; i++) {
         let ind = rand.getInt(0, i - 1);
-        let temp = this[ind];
-        this[ind] = this[i];
-        this[i] = temp;
+        [this[i], this[ind]] = [this[ind], this[i]];
     }
 }
 
