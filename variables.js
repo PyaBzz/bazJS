@@ -14,3 +14,8 @@ ifFunctionRun = function (variable, ...params) {
     if (isFunction(variable))
         variable(...params);
 }
+
+copyProperties = function (from, to) {
+    for (let key in from)
+        to[key] = from[key];
+}
