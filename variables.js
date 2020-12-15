@@ -19,3 +19,7 @@ copyProperties = function (from, to) {
     for (let key in from)
         to[key] = from[key];
 }
+
+getPropKeyByIndex = function (obj, i) {
+    return Object.keys(obj)[i];
+}

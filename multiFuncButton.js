@@ -4,10 +4,9 @@ class MultiFuncButton {
 
     constructor(element, funcDescriptions) {
         this.#element = element;
-        for (let desc of funcDescriptions) {
-            this.#funcs[desc.label] = desc.func;
-        }
-        this.bind(funcDescriptions[0].label);
+        copyProperties(funcDescriptions, this.#funcs);
+        const initialKey = getPropKeyByIndex(this.#funcs, 0);
+        this.bind(initialKey);
     }
 
     bind(label) {
