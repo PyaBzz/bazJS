@@ -1,37 +1,41 @@
-Infoboard = function (containerId, ...items) {
-	this.container = document.getElementById(containerId);
-	this.container.classList.add("infoboard")
-	this.items = {};
-	const me = this;
-	items.forEach(item => {
-		const itemKey = item[0];
-		const initialValue = item[1] == null ? "" : item[1];
+class Infoboard {
+	#items = {};
 
-		let itemElem = document.createElement('div');
-		itemElem.classList.add('infoboard-item');
+	constructor(parent, items) {
+		parent.classList.add("infoboard")
+		const me = this;
+		for (let key in items) {
+			const initialValue = items[key];
 
-		let labelElem = document.createElement('span');
-		labelElem.classList.add("infoboard-label");
-		labelElem.innerText = itemKey + ": ";
-		itemElem.appendChild(labelElem);
+			let itemElem = document.createElement('div');
+			itemElem.classList.add('infoboard-item');
 
-		let valueElem = document.createElement('span');
-		valueElem.classList.add("infoboard-value");
-		itemElem.appendChild(valueElem);
+			let labelElem = document.createElement('span');
+			labelElem.classList.add("infoboard-label");
+			labelElem.innerText = key + ": ";
+			itemElem.appendChild(labelElem);
 
-		me.items[itemKey] = {};
-		me.items[itemKey].get = function () { return valueElem.innerText };
-		me.items[itemKey].set = function (val) { valueElem.innerText = val };
+			let valueElem = document.createElement('span');
+			valueElem.classList.add("infoboard-value");
+			itemElem.appendChild(valueElem);
 
-		me.items[itemKey].set(initialValue);
-		me.container.appendChild(itemElem);
-	});
-}
+			me.#items[key] = {};
+			me.#items[key].get = function () { return valueElem.innerText };
+			me.#items[key].set = function (val) { valueElem.innerText = val };
 
-Infoboard.prototype.get = function (key) {
-	return this.items[key].get();
-}
+			me.#items[key].set(initialValue);
+			parent.appendChild(itemElem);
+		}
+	}
 
-Infoboard.prototype.set = function (key, value) {
-	return this.items[key].set(value);
+	get(key) {
+		return this.#items[key].get();
+	}
+
+	set(items) {
+		for (let key in items) {
+			const val = items[key];
+			this.#items[key].set(val);
+		}
+	}
 }
