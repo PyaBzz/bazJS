@@ -1,8 +1,16 @@
 class Infoboard {
 	#items = {};
 
-	constructor(parent, items) {
+	constructor(parent, items, title) {
 		parent.classList.add("infoboard")
+
+		if (title) {
+			const titleElem = document.createElement('b');
+			titleElem.classList.add('infoboard-title');
+			titleElem.innerText = title;
+			parent.appendChild(titleElem);
+		}
+
 		const me = this;
 		for (let key in items) {
 			const initialValue = items[key];

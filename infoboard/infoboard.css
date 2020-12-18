@@ -2,6 +2,10 @@
   text-align: left;
 }
 
+.infoboard-title {
+  color: green;
+}
+
 .infoboard-item {
   line-height: 1;
 }
