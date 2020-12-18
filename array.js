@@ -18,13 +18,18 @@ Array.prototype.clone = function (fromIndex = 0, elementCount) {
 }
 
 Array.prototype.forEachInterval = function (action, timeStep, callback) {
+    if (this.hasNone)
+        return;
     let i = 0;
+    let elem = this[0];
+    action(elem);
     let me = this;
-    const loopHandle = setInterval(function () { //Todo: Could remove the first delay
-        let element = me[i];
-        action(element);
+    const loopHandle = setInterval(function () { //Todo: Could add index to callback args
         i++;
-        if (i === me.length) {
+        if (i < me.length) {
+            elem = me[i];
+            action(elem);
+        } else {
             clearInterval(loopHandle);
             ifFunctionRun(callback);
         }
