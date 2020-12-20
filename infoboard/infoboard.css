@@ -3,6 +3,8 @@
 }
 
 .infoboard-title {
+  display: block;
+  margin-bottom: 10px;
   color: green;
 }
 
