@@ -73,6 +73,8 @@ Array.prototype.sortDescending = function (valueGetter) {
 }
 
 Array.prototype.pickRandom = function (batchSize = 1) {
+    if (this.hasNone)
+        throw new Error("Array is empty!")
     if (batchSize === 1) {
         let randomIndex = Math.floor(Math.random() * this.length);
         return this[randomIndex];
