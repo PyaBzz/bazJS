@@ -3,10 +3,13 @@ class CsvFiler {
         throw new Error("Do not instantiate a static class");
     }
 
-    static download(rowsArrary, fileName) {
+    static download(rowsArrary, fileName, colWidth = 0) {
         let csvContent = "";
-        rowsArrary.forEach(function (row) {
-            csvContent += row.join(', ');
+        rowsArrary.forEach(row => {
+            row.forEach(val => {
+                csvContent += val.toString().padEnd(colWidth, " ");
+                csvContent += ", ";
+            })
             csvContent += "\n";
         });
 
