@@ -1,5 +1,5 @@
 Random = function () {
-    //
+    //Todo: Make static
 }
 
 Random.prototype.getInt = function (lower, upper) {  // Inclusive of boundaries

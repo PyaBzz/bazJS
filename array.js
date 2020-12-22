@@ -94,6 +94,12 @@ Array.prototype.shuffle = function (batchSize = 1) {
     }
 }
 
+Array.prototype.toString = function (divider = "|") {
+    const res = [];
+    this.forEach((e, i, a) => res.push(e));
+    return res.join(divider);
+}
+
 Object.defineProperties(Array.prototype, {
     last: { get: function () { return this[this.length - 1] } },
     hasAny: { get: function () { return Boolean(this.length) } },
