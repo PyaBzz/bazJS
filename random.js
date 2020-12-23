@@ -1,11 +1,13 @@
-Random = function () {
-    //Todo: Make static
-}
+class Random {
+    constructor() {
+        throw new Error("Do not instantiate a static class");
+    }
 
-Random.prototype.getInt = function (lower, upper) {  // Inclusive of boundaries
-    return lower + Math.floor(Math.random() * (upper - lower + 1));
-}
+    static getInt(lower, upper) {  // Inclusive of boundaries
+        return lower + Math.floor(Math.random() * (upper - lower + 1));
+    }
 
-Random.prototype.getInRange = function (lower, upper) {  // Exclusive of upper bound
-    return lower + Math.random() * (upper - lower);
+    static getInRange(lower, upper) {  // Exclusive of upper bound
+        return lower + Math.random() * (upper - lower);
+    }
 }
