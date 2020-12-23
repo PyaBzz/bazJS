@@ -87,9 +87,8 @@ Array.prototype.pickRandom = function (batchSize = 1) {
 }
 
 Array.prototype.shuffle = function (batchSize = 1) {
-    let rand = new Random();
     for (let i = 1; i < this.length; i++) {
-        let ind = rand.getInt(0, i - 1);
+        let ind = Random.getInt(0, i - 1);
         [this[i], this[ind]] = [this[ind], this[i]];
     }
 }
